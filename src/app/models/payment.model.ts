@@ -12,6 +12,9 @@ export class Payment {
     this.year = year;
   }
 
+
+  //asdfasfd
+  //status of month
   status(){
 
     let thisMonth = new Date().getMonth() + 1;
