@@ -1,0 +1,38 @@
+<div class="container">
+
+  <div class="row mt-5">
+    <div class="col-md-6">
+      <h2>Usuarios</h2>
+    </div>
+    <div class="col-md-3">
+      <button class="btn btn-outline-success w-100" type="button" (click) = "new()"><i class="fa fa-plus"></i> Nuevo usuario</button>
+    </div>
+    <div class="col-md-3">
+      <input type="text" class="form-control" placeholder="Buscar usuario.. (nick o IP)" [(ngModel)]="termino" (keyup) = "find(termino)">
+    </div>
+  </div>
+  <table class="table table-hover table-bordered table-responsive">
+    <thead>
+      <tr>
+        <th class="w-25">Ip</th>
+        <th class="w-50">user</th>
+        <th class="w-25">Accion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let client of clients; let i = index">
+        <td>{{client.ip_address}}</td>
+        <td>{{client.nick}}</td>
+        <td>
+          <button class="btn btn-outline-info" type="button" (click)= "edit(client.id)"><i class="fa fa-pencil"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="alert alert-info text-center" role="alert" *ngIf="clients.length == 0">
+    <p>
+      <i class="fa fa-spin fa-spinner fa-4x"></i>
+    </p>
+    <h2 class="text-center">No hay usuarios que mostrar</h2>
+  </div>
+</div>

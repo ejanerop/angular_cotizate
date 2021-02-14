@@ -1,0 +1,93 @@
+<div class="container mt-5">
+
+  <form [formGroup]="form" (ngSubmit) = "save()">
+    <div class="row">
+      <div class="col-md-10">
+        <h2>Usuarios a pagar</h2>
+      </div>
+      <div class="col-md-2">
+        <button type="submit" class="btn btn-primary pull-right" *ngIf="form.valid"> <i class="fa fa-save"></i> Guardar</button>
+        <button type="button" class="btn btn-danger pull-right disabled" *ngIf="form.invalid"> <i class="fa fa-close"></i> Revisa</button>
+      </div>
+    </div>
+    <table class="table table-hover table-bordered table-responsive">
+      <thead>
+        <tr>
+          <th>Ip</th>
+          <th>user</th>
+          <th *ngFor="let i of months">{{i | toMonth}} </th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="clientsToPay.length != 0">
+          <td></td>
+          <td></td>
+          <td *ngFor="let i of months">
+            <button class="btn btn-success btn-sm text-light" (click) = "fillMonth(i)" type="button"><i class="fa fa-arrow-down"></i> 75</button>
+          </td>
+          <td></td>
+        </tr>
+        <tr *ngFor="let user of clientsToPay; let i = index" formArrayName="users">
+          <td>{{user.ip_address}}</td>
+          <td>{{user.nick}}</td>
+          <ng-container  formGroupName="{{i}}">
+            <ng-container  formArrayName="payments">
+              <td *ngFor="let payment of payments(i).controls; let j = index">
+                <input type="text" class="form-control" maxlength="3" [formControlName]="j" [class.is-invalid]="invalidPayment(i, j)">
+              </td>
+            </ng-container>
+          </ng-container>
+          <td>
+            <button class="btn btn-danger" type="button" (click)= "removeUserFromPay(i)"><i class="fa fa-close"></i></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="alert alert-warning text-center" role="alert" *ngIf="clientsToPay.length == 0">
+      <p>
+        <i class="fa  fa-exclamation-triangle fa-4x"></i>
+      </p>
+      <h2 class="text-center">Añade usuarios a pagar</h2>
+      <p>
+        <i class="fa  fa-arrow-circle-down fa-4x"></i>
+      </p>
+    </div>
+  </form>
+
+
+
+  <div class="row mt-5">
+    <div class="col-md-8">
+      <h2>Usuarios</h2>
+    </div>
+    <div class="col-md-4">
+      <input type="text" class="form-control" placeholder="Buscar usuario.. (nick o IP)" [(ngModel)]="termino" (keyup) = "find(termino)">
+    </div>
+  </div>
+  <table class="table table-hover table-bordered table-responsive">
+    <thead>
+      <tr>
+        <th>Ip</th>
+        <th>user</th>
+        <th>Accion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let client of clients; let i = index">
+        <td>{{client.ip_address}}</td>
+        <td>{{client.nick}}</td>
+        <td>
+          <button class="btn btn-success" type="button" (click)= "addUserToPay(i)"><i class="fa fa-plus"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="alert alert-info text-center" role="alert" *ngIf="clients.length == 0">
+    <p>
+      <i class="fa  fa-eye fa-4x"></i>
+    </p>
+    <h2 class="text-center">No hay usuarios que mostrar</h2>
+  </div>
+
+</div>

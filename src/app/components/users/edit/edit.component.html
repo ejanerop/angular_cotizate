@@ -1,0 +1,42 @@
+<div class="container">
+  <h1 class="text-center" *ngIf="loading">...</h1>
+  <h1 class="text-center" *ngIf="!new && !loading">Editar usuario: <small>{{user.nick}}</small></h1>
+  <h1 class="text-center" *ngIf="new && !loading">Crear nuevo usuario</h1>
+  <hr>
+
+  <div class="row text-right">
+    <div class="col">
+      <button class="btn btn-danger" [routerLink]="['/users']">
+        <i class="fa fa-arrow-left"></i> Atrás
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="row justify-content-center">
+    <div class="col-md-4">
+      <div class="alert alert-info text-center" role="alert">
+        <p>
+          <i class="fa fa-spin fa-spinner fa-4x"></i>
+        </p>
+        <h2 class="text-center">Cargando</h2>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!loading" class="row justify-content-center">
+    <div class="col-md-4">
+      <form [formGroup]="form" (ngSubmit) = "save()">
+        <div class="mb-3">
+          <label for="nick" class="form-label"> <h5>Usuario</h5> </label>
+          <input type="nick" name="nick" id="nick" class="form-control form-control-lg" formControlName = "nick" [class.is-invalid]="invalidNick"  placeholder="Nick">
+        </div>
+        <div class="mb-3">
+          <label for="ip_address" class="form-label"> <h5>Direccion IP</h5> </label>
+          <input type="email"  id="ip_address" class="form-control form-control-lg" formControlName = "ip_address" [class.is-invalid]="invalidIpAddress" placeholder="10.66.67.xxx">
+        </div>
+        <div class="mb-3">
+          <button class="btn btn-outline-primary btn-lg w-100" type="submit">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

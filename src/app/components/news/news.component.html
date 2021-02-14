@@ -1,0 +1,89 @@
+
+  <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"></li>
+      <li data-bs-target="#myCarousel" data-bs-slide-to="1"></li>
+      <li data-bs-target="#myCarousel" data-bs-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
+        <!--<img src="../../../assets/GOL.jpg" class="d-block w-100" alt="...">-->
+        <div class="container">
+          <div class="carousel-caption text-start">
+            <h1>Bienvenido al Portal STV</h1>
+            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+            <!--<p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>-->
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
+
+        <div class="container">
+          <div class="carousel-caption">
+            <h1>Mantente al día con los pagos de la red</h1>
+            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+            <p><a class="btn btn-lg btn-primary" [routerLink]="['/home']" role="button">Ir a lista de usuarios</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
+
+        <div class="container">
+          <div class="carousel-caption text-end">
+            <h1>One more for good measure.</h1>
+            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+            <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#myCarousel" role="button" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#myCarousel" role="button" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </a>
+  </div>
+
+
+  <div class="container marketing">
+
+    <!-- Three columns of text below the carousel -->
+    <div class="row justify-content-center">
+      <div class="col-lg-4">
+        <img src="../../../assets/cash.svg" class="bd-placeholder-img rounded-circle" alt="140x140" width="140" height="140">
+        <h2>Cotización</h2>
+        <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+        <p><a class="btn btn-secondary" [routerLink]="['/home']" role="button">Ir a lista de usuarios &raquo;</a></p>
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+        <img src="../../../assets/ts3.png" class="bd-placeholder-img rounded-circle" alt="140x140" width="140" height="140">
+        <h2>Sevidor TeamSpeak3</h2>
+        <p>Si estas aburrido o no tienes nadie con quien hablar, únete a nuestro servidor de TeamSpeak 3, ideal para conversar con tus amigos.</p>
+        <p><a class="btn btn-secondary" href="ts3server://10.24.122.5" role="button">Abrir TS3 &raquo;</a></p>
+      </div><!-- /.col-lg-4 -->
+      <div *ngIf="isAuth()"class="col-lg-4">
+        <img src="../../../assets/cash.svg" class="bd-placeholder-img rounded-circle" alt="140x140" width="140" height="140">
+        <h2>Actualizar pagos</h2>
+        <p>Vino alguien a pagarte? Llegaste de la calle y te dejaron dinero de la red? No lo dejes para después que sabes que se te olvida, actualiza los pagos en la flamante página que te hizo Eric! :)</p>
+        <p><a class="btn btn-secondary" [routerLink]="['/payments']" role="button">Ir a Pagos &raquo;</a></p>
+      </div><!-- /.col-lg-4 -->
+    </div><!-- /.row -->
+
+
+    <!-- START THE FEATURETTES -->
+
+    <app-new [imageFirst] = "true"></app-new>
+    <app-new [imageFirst] = "false"></app-new>
+    <app-new [imageFirst] = "true"></app-new>
+
+    <hr class="featurette-divider">
+
+    <!-- /END THE FEATURETTES -->
+
+  </div><!-- /.container -->

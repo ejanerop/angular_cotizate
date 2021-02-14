@@ -1,0 +1,14 @@
+<main class="form-signin text-center">
+  <form [formGroup]="form" (ngSubmit)="login()"
+  >
+    <img class="mb-4" src="../assets/cash.svg" alt="" width="72" height="57">
+    <h1 class="h3 mb-3 fw-normal">Cotización</h1>
+    <label for="" class="visually-hidden">Usuario</label>
+    <input type="text" name="username" formControlName = "username" [class.is-invalid]="invalidUsername" class="form-control" placeholder="Usuarios" required>
+    <label for="" class="visually-hidden">Contraseña</label>
+    <input type="password" name="password" formControlName = "password" [class.is-invalid]="invalidPassword" class="form-control" placeholder="Contraseña" required>
+    <button class="w-100 btn btn-lg btn-outline-primary" type="submit">Iniciar sesión</button>
+    <p class="mt-5 mb-3 text-muted">&copy; 2021. xXloneR@ngerXx</p>
+
+  </form>
+</main>

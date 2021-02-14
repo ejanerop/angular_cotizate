@@ -28,9 +28,15 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/bootstrap/css/bootstrap.min.css",
+              "src/assets/font-awesome/css/font-awesome.min.css",
+              "src/assets/animate.min.css"
+
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/bootstrap/js/bootstrap.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -91,7 +97,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/bootstrap/css/bootstrap.min.css"
             ],
             "scripts": []
           }
