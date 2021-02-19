@@ -4,14 +4,18 @@ import { Payment } from "./payment.model";
 
  export class Client {
 
-  id         : number;
-  nick       : string;
-  ip_address : string;
-  payments   : Payment[];
+  id             : number;
+  nick           : string;
+  account        : string;
+  active_account : boolean;
+  ip_address     : string;
+  payments       : Payment[];
 
-  constructor( id:number, nick:string, ip_address:string, payments? : Payment[] ) {
+  constructor( id:number, nick:string, account : string, ip_address:string, payments? : Payment[] ) {
     this.id = id;
     this.nick = nick;
+    this.account = account;
+    this.active_account = true;
     this.ip_address = ip_address;
     this.payments = payments ? payments : [] ;
   }

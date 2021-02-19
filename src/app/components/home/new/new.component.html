@@ -1,0 +1,11 @@
+<hr class="featurette-divider">
+
+    <div class="row featurette">
+      <div class="col-md-7" [class.order-md-2]="imageFirst">
+        <h2 class="featurette-heading">{{title}}<span class="text-muted"></span></h2>
+        <p class="lead">{{description}}</p>
+      </div>
+      <div class="col-md-5" [class.order-md-1]="imageFirst">
+        <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" [src]="url" alt="" width="500" height="500">
+      </div>
+    </div>

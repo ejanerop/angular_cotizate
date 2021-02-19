@@ -14,7 +14,7 @@
       <thead>
         <tr>
           <th>Ip</th>
-          <th>user</th>
+          <th>Usuario</th>
           <th *ngFor="let i of months">{{i | toMonth}} </th>
           <th>Remove</th>
         </tr>
@@ -68,15 +68,17 @@
   <table class="table table-hover table-bordered table-responsive">
     <thead>
       <tr>
-        <th>Ip</th>
-        <th>user</th>
-        <th>Accion</th>
+        <th class="w-15">Ip</th>
+        <th>Usuario</th>
+        <th>Cuenta JC</th>
+        <th class="w-10">Accion</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let client of clients; let i = index">
         <td>{{client.ip_address}}</td>
         <td>{{client.nick}}</td>
+        <td>{{client.account}}</td>
         <td>
           <button class="btn btn-success" type="button" (click)= "addUserToPay(i)"><i class="fa fa-plus"></i></button>
         </td>

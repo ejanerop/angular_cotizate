@@ -16,12 +16,15 @@ export class EditComponent implements OnInit {
   id : string | null = '2';
   new : boolean = true;
   loading : boolean = true;
-  user : Client = new Client(0, '', '');
+  user : Client = new Client(0, '', '', '');
 
   constructor(private route : ActivatedRoute, private router : Router, private fb : FormBuilder, private service : ClientsService) {
     this.form = this.fb.group({
       'nick' : ['', Validators.required],
-      'ip_address' : ['', [Validators.required, Validators.pattern('10\.66\.67\.(25[0-4]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[1-9])')]]
+      'account' : ['', Validators.required],
+      'ip_address' : ['', [Validators.required, Validators.pattern('10\.66\.67\.(25[0-4]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[1-9])')]],
+      'active_account' : [1],
+
     });
   }
 
@@ -33,7 +36,9 @@ export class EditComponent implements OnInit {
       this.service.getClient(this.id).subscribe((resp : any) => {
         this.user.id = resp.id;
         this.user.nick = resp.nick;
+        this.user.account = resp.account;
         this.user.ip_address = resp.ip_address;
+        this.user.active_account = resp.active_account;
         this.loading = false;
         this.new = false;
         this.reset();
@@ -44,6 +49,10 @@ export class EditComponent implements OnInit {
   }
 
 
+  public invalid(control : string){
+    return this.form.get(control)?.invalid && this.form.get(control)?.touched;
+  }
+
   public get invalidNick() {
     return this.form.get('nick')?.invalid && this.form.get('nick')?.touched;
   }
@@ -51,12 +60,25 @@ export class EditComponent implements OnInit {
   public get invalidIpAddress() {
     return this.form.get('ip_address')?.invalid && this.form.get('ip_address')?.touched;
   }
+  public get invalidAccount() {
+    return this.form.get('account')?.invalid && this.form.get('account')?.touched;
+  }
+
+  public get activeAccount() {
+    return this.form.get('active_account')?.value;
+  }
+
+  toggleAccountState(){
+    return this.form.get('active_account')?.setValue(!this.activeAccount);
+  }
 
   reset() {
 
     this.form.reset({
       'nick' : this.user.nick,
-      'ip_address' : this.user.ip_address
+      'account' : this.user.account,
+      'ip_address' : this.user.ip_address,
+      'active_account' : this.user.active_account,
     });
   }
 
@@ -68,12 +90,15 @@ export class EditComponent implements OnInit {
     if (this.form.invalid) {
       this.form.get('nick')?.markAsTouched();
       this.form.get('ip_address')?.markAsTouched();
+      this.form.get('account')?.markAsTouched();
       return;
     }
     const old_ip = this.user.ip_address;
 
     this.user.nick = this.form.value.nick;
+    this.user.account = this.form.value.account;
     this.user.ip_address = this.form.value.ip_address;
+    this.user.active_account = this.form.value.active_account;
 
     this.service.editUser(this.user).subscribe( (resp : any)=> {
       console.log(resp)

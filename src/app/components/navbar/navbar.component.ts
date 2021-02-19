@@ -10,9 +10,12 @@ import Swal from 'sweetalert2';
 })
 export class NavbarComponent implements OnInit {
 
+  ip : string = '';
+
   constructor( public router: Router, private clientService : ClientsService ) { }
 
   ngOnInit(): void {
+    this.setIp();
   }
 
   login() {
@@ -48,11 +51,14 @@ export class NavbarComponent implements OnInit {
         });
       }
     });
-
   }
 
   isAuth(){
     return this.clientService.isAuth();
+  }
+
+  setIp(){
+    this.clientService.getIp().subscribe((data :any) => this.ip = data);
   }
 
 }

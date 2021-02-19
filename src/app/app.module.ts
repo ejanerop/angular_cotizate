@@ -7,12 +7,15 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { ToMonthPipe } from './pipes/to-month.pipe';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { NewsComponent } from './components/news/news.component';
 import { PaymentsComponent } from './components/payments/payments.component';
 import { LoginComponent } from './components/login/login.component';
 import { UsersComponent } from './components/users/users.component';
 import { EditComponent } from './components/users/edit/edit.component';
-import { NewComponent } from './components/news/new/new.component';
+import { EditComponent as EditNewsComponent} from './components/news/edit/edit.component';
+import { NewComponent } from './components/home/new/new.component';
+import { StoriesComponent } from './components/stories/stories.component';
+import { NewsComponent } from './components/news/news.component';
+import { UserListComponent } from './components/users/list/user-list.component';
 
 @NgModule({
   declarations: [
@@ -20,12 +23,15 @@ import { NewComponent } from './components/news/new/new.component';
     HomeComponent,
     ToMonthPipe,
     NavbarComponent,
-    NewsComponent,
     PaymentsComponent,
     LoginComponent,
     UsersComponent,
     EditComponent,
-    NewComponent
+    NewComponent,
+    StoriesComponent,
+    NewsComponent,
+    UserListComponent,
+    EditNewsComponent
   ],
   imports: [
     BrowserModule,

@@ -12,6 +12,8 @@
     </div>
   </div>
 
+  <hr>
+
   <div *ngIf="loading" class="row justify-content-center">
     <div class="col-md-4">
       <div class="alert alert-info text-center" role="alert">
@@ -28,10 +30,28 @@
         <div class="mb-3">
           <label for="nick" class="form-label"> <h5>Usuario</h5> </label>
           <input type="nick" name="nick" id="nick" class="form-control form-control-lg" formControlName = "nick" [class.is-invalid]="invalidNick"  placeholder="Nick">
+          <div class="invalid-feedback">
+            El nombre es obligatorio
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="account" class="form-label"> <h5>Cuenta JC</h5> </label>
+          <input type="account" name="account" id="account" class="form-control form-control-lg" formControlName = "account" [class.is-invalid]="invalidAccount"  placeholder="Usuario de Jc si @">
+          <div class="invalid-feedback">
+            La cuenta JC es obligatoria
+          </div>
         </div>
         <div class="mb-3">
           <label for="ip_address" class="form-label"> <h5>Direccion IP</h5> </label>
-          <input type="email"  id="ip_address" class="form-control form-control-lg" formControlName = "ip_address" [class.is-invalid]="invalidIpAddress" placeholder="10.66.67.xxx">
+          <input type="text"  id="ip_address" class="form-control form-control-lg" formControlName = "ip_address" [class.is-invalid]="invalidIpAddress" placeholder="10.66.67.xxx">
+          <div class="invalid-feedback">
+            Escribe una dirección IP válida, en el rango 10.66.67.x
+          </div>
+        </div>
+        <div class="mb-5">
+          <label for="" class="form-label w-100"> <h5>Estado de la cuenta</h5> </label>
+          <button *ngIf="activeAccount" class="btn btn-outline-info btn-lg w-50 form-control" (click)="toggleAccountState()" type="button"> <i class="fa fa-wifi"></i> Activo</button>
+          <button *ngIf="!activeAccount" class="btn btn-outline-secondary btn-lg w-50 form-control" (click)="toggleAccountState()" type="button"> <i class="fa fa-close"></i> Inactivo</button>
         </div>
         <div class="mb-3">
           <button class="btn btn-outline-primary btn-lg w-100" type="submit">Guardar</button>

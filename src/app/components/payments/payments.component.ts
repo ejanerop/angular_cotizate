@@ -9,8 +9,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-payments',
   templateUrl: './payments.component.html',
-  styles: [
-  ]
+  styleUrls: ['./payments.component.css']
 })
 export class PaymentsComponent implements OnInit {
 
@@ -37,7 +36,7 @@ export class PaymentsComponent implements OnInit {
           let payment = new Payment(paymentItem.cant, paymentItem.month, paymentItem.year);
           payments.push(payment);
         }
-        let client = new Client(item.id, item.nick, item.ip_address, payments);
+        let client = new Client(item.id, item.nick, item.nick, item.ip_address, payments);
         this.clients.push(client);
       }
       this.clients.sort((a, b) => Number(a.ip_address.split(".")[3]) - Number(b.ip_address.split(".")[3]));

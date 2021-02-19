@@ -8,26 +8,32 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-pills">
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/news']" routerLinkActive="active">Inicio</a>
+        <li class="nav-item ms-3">
+          <a class="nav-link" [routerLink]="['/home']" routerLinkActive="active">Inicio</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link " [routerLink]="['/home']" routerLinkActive="active">Usuarios</a>
+        <li class="nav-item ms-3">
+          <a class="nav-link " [routerLink]="['/user_list']" routerLinkActive="active">Usuarios</a>
         </li>
         <ng-container *ngIf="isAuth()">
-          <li class="nav-item">
+          <li class="nav-item ms-3">
             <a class="nav-link" [routerLink]="['/payments']" routerLinkActive="active">Pagos</a>
           </li>
         </ng-container>
         <ng-container *ngIf="isAuth()">
-          <li class="nav-item">
+          <li class="nav-item ms-3">
             <a class="nav-link" [routerLink]="['/users']" routerLinkActive="active">Editar usuarios</a>
+          </li>
+        </ng-container>
+        <ng-container *ngIf="isAuth()">
+          <li class="nav-item ms-3">
+            <a class="nav-link" [routerLink]="['/news']" routerLinkActive="active">Gestionar noticias</a>
           </li>
         </ng-container>
       </ul>
       <div class="d-flex">
+        <button class="btn btn-outline-secondary btn-lg me-2 text-white" type="button" disabled> Tu ip:  {{ip}}</button>
         <button class="btn btn-outline-success btn-lg" *ngIf="!isAuth()" (click) = "login()" type="button"> <i class="fa fa-check"></i> Login</button>
-        <button class="btn btn-outline-danger btn-lg"  *ngIf="isAuth()" (click) = "logout()" type="button"><i class="fa fa-close"></i>  Logout</button>
+        <button class="btn btn-outline-danger btn-lg"  *ngIf="isAuth()" (click) = "logout()" type="button"><i class="fa fa-close"></i> Logout</button>
     </div>
     </div>
   </div>

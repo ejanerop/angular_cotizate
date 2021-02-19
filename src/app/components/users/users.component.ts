@@ -16,13 +16,14 @@ export class UsersComponent implements OnInit {
   clients : Client[] = [];
   termino : string = '';
 
-  constructor(private clientService : ClientsService, private router : Router) { }
+  constructor( private clientService : ClientsService, private router : Router ) { }
 
   ngOnInit(): void {
     this.clientService.getClients().subscribe((data:any)=>{
       for (const item of data) {
         let payments : Payment[] = [];
-        let client = new Client(item.id, item.nick, item.ip_address, payments);
+        let client = new Client(item.id, item.nick, item.account, item.ip_address, payments);
+        client.active_account = item.active_account;
         this.clients.push(client);
       }
       this.clients.sort((a, b) => Number(a.ip_address.split(".")[3]) - Number(b.ip_address.split(".")[3]));

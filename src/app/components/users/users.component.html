@@ -14,17 +14,25 @@
   <table class="table table-hover table-bordered table-responsive">
     <thead>
       <tr>
-        <th class="w-25">Ip</th>
-        <th class="w-50">user</th>
-        <th class="w-25">Accion</th>
+        <th class="w-15">Ip</th>
+        <th class="w-25">Nick</th>
+        <th class="w-25">Cuenta</th>
+        <th class="w-20">Estado de JC</th>
+        <th class="w-15">Accion</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let client of clients; let i = index">
         <td>{{client.ip_address}}</td>
         <td>{{client.nick}}</td>
+        <td>{{client.account}}</td>
         <td>
-          <button class="btn btn-outline-info" type="button" (click)= "edit(client.id)"><i class="fa fa-pencil"></i></button>
+          <span *ngIf="client.active_account" class="badge bg-info text-white">Activa</span>
+          <span *ngIf="!client.active_account" class="badge bg-secondary text-white">Inactiva</span>
+        </td>
+        <td>
+          <button class="btn btn-outline-info me-2" type="button" (click)= "edit(client.id)"><i class="fa fa-pencil"></i></button>
+          <button class="btn btn-outline-danger" type="button"><i class="fa fa-trash"></i></button>
         </td>
       </tr>
     </tbody>

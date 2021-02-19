@@ -1,0 +1,68 @@
+<div class="container">
+  <h1 class="text-center" *ngIf="loading">...</h1>
+  <h1 class="text-center" *ngIf="!isNew && !loading">Editar usuario: <small></small></h1>
+  <h1 class="text-center" *ngIf="isNew && !loading">Crear nuevo usuario</h1>
+  <hr>
+
+  <div class="row text-right">
+    <div class="col">
+      <button class="btn btn-danger" [routerLink]="['/news']">
+        <i class="fa fa-arrow-left"></i> Atrás
+      </button>
+    </div>
+  </div>
+
+  <hr>
+
+  <div *ngIf="loading" class="row justify-content-center">
+    <div class="col-md-4">
+      <div class="alert alert-info text-center" role="alert">
+        <p>
+          <i class="fa fa-spin fa-spinner fa-4x"></i>
+        </p>
+        <h2 class="text-center">Cargando</h2>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!loading" class="row">
+    <div class="col-md-6">
+      <form [formGroup]="form" (ngSubmit) = "save()">
+        <div class="mb-3">
+          <label for="title" class="form-label"> <h5>Título</h5> </label>
+          <input type="text" name="title" id="title" class="form-control form-control-lg" formControlName = "title" [class.is-invalid]="invalid('title')"  placeholder="Encabezado de la noticia">
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label"> <h5>Contenido</h5> </label>
+          <textarea name="description" id="description" class="form-control form-control-lg" formControlName = "description" [class.is-invalid]="invalid('description')"  placeholder="Cuerpo de la noticia" cols="30" rows="10"></textarea>
+        </div>
+        <div class="mb-5">
+          <label for="image" class="form-label"> <h5>Imagen</h5> </label>
+          <input type="file" accept="image/*" id="image" class="form-control form-control-lg" formControlName = "image" [class.is-invalid]="invalid('image')" (change)="onSelectFile($event)">
+        </div>
+        <div class="mb-5">
+          <img [src]="url" height="200">
+        </div>
+        <div class="mb-3">
+          <button class="btn btn-outline-primary btn-lg w-100" type="submit">Guardar</button>
+        </div>
+
+      </form>
+    </div>
+    <div class="col-md-6">
+      <pre>
+        {{this.form.value | json}}
+      </pre>
+      <br>
+      <pre>
+        {{this.new | json}}
+      </pre>
+    </div>
+  </div>
+  <div class="row mb-5">
+    <h2 class="text-center">Preview</h2>
+    <app-new [imageFirst] = "true"
+    [url]="url"
+    [title]="this.new.title"
+    [description]="this.new.description"></app-new>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-md-8">
+      <h2>Usuarios</h2>
+    </div>
+    <div *ngIf="isAuth()" class="col-md-4">
+      <input type="text" class="form-control" placeholder="Buscar usuario.. (nick o IP)" [(ngModel)]="termino" (keyup) = "find(termino)">
+    </div>
+  </div>
+  <table class="table table-hover table-bordered table-responsive text">
+    <thead class="table-dark">
+      <tr>
+        <th>Ip</th>
+        <th>Nick</th>
+        <th>Cuenta</th>
+        <th *ngFor="let i of months">{{i | toMonth}} </th>
+        <th>Estado de JC</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let client of this.clients">
+        <td>{{client.ip_address}}</td>
+        <td>{{client.nick}}</td>
+        <td>{{client.account}}</td>
+        <td *ngFor="let i of months">
+          <div [ngSwitch]="client.statusOfMonth(i)">
+            <span *ngSwitchCase="'Al día'" class="badge bg-success text-white">
+              <ng-container *ngIf="!isAuth()">{{client.statusOfMonth(i)}}</ng-container>
+              <ng-container *ngIf="isAuth()">{{client.payments[i-1].cant}}</ng-container>
+            </span>
+            <span *ngSwitchCase="'En tiempo'" class="badge bg-warning text-white">
+              <ng-container *ngIf="!isAuth()">{{client.statusOfMonth(i)}}</ng-container>
+              <ng-container *ngIf="isAuth()">{{client.payments[i-1].cant}}</ng-container>
+            </span>
+            <span *ngSwitchCase="'Atrasado'" class="badge bg-danger text-white">
+              <ng-container *ngIf="!isAuth()">{{client.statusOfMonth(i)}}</ng-container>
+              <ng-container *ngIf="isAuth()">{{client.payments[i-1].cant}}</ng-container>
+            </span>
+            <div *ngSwitchDefault></div>
+          </div>
+        </td>
+        <td>
+          <span *ngIf="client.active_account" class="badge rounded-pill bg-info text-white">Activa</span>
+          <span *ngIf="!client.active_account" class="badge rounded-pill bg-secondary text-white">Inactiva</span>
+        </td>
+      </tr>
+      <tr *ngIf="isAuth()" class="table-dark">
+        <td><strong>Total:</strong></td>
+        <td>{{clientsFull.length}} usuarios</td>
+        <td>{{total()}} pesos</td>
+        <td *ngFor="let i of months">{{totalOf(i)}}</td>
+        <td>{{totalAccounts(true)}} activas, {{totalAccounts(false)}} inactivas</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="alert alert-info text-center" role="alert" *ngIf="clients.length == 0">
+    <p>
+      <i class="fa fa-spinner fa-spin fa-4x"></i>
+    </p>
+    <h2 class="text-center"> Esperando información </h2>
+  </div>
+</div>
+
+
+
+
