@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Client } from '../models/client.model';
 import { map } from "rxjs/operators";
+import { New } from '../models/new.model';
 
 @Injectable({
   providedIn: 'root'
@@ -47,7 +48,27 @@ export class ClientsService {
 
     const url = 'http://localhost:8001/api/new';
 
+    if (this.api_token != null) {
+      data.append('api_token', this.api_token);
+    }
+
     return this.http.post(url, data, {observe: 'response'});
+  }
+
+  deleteNew(id: number) {
+
+    const url = `${this._url}/new/${id}?api_token=${this.api_token}`;
+
+    return this.http.delete(url,{observe : 'response'});
+
+
+  }
+  deleteClient(id: number) {
+
+    const url = `${this._url}/client/${id}?api_token=${this.api_token}`;
+
+    return this.http.delete(url,{observe : 'response'});
+
   }
 
   getClient(id : string){
@@ -64,6 +85,17 @@ export class ClientsService {
   getIp(){
 
     return this.getQuery(`ip`);
+
+  }
+
+  getImagePath(portalNew : New){
+
+    const src = portalNew.src.split('\\');
+
+    const folder = src[0];
+    const file = src[1];
+
+    return `${this._url}/storage/${folder}/${file}`;
 
   }
 
@@ -113,7 +145,6 @@ export class ClientsService {
       const token = this.api_token;
       return this.http.post(url, {api_token : token}, {observe: 'response'}).pipe(
         map( (resp : any) => {
-          console.log(token);
           this.removeToken();
           return resp;
         })

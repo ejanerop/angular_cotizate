@@ -127,10 +127,8 @@ export class PaymentsComponent implements OnInit {
     });
     Swal.showLoading();
 
-    console.log(this.form.value);
 
     this.clientService.addPayments(this.form.value).subscribe(resp => {
-      console.log(resp);
       if (resp.status == 201) {
         Swal.fire({
           icon : 'success',

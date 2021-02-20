@@ -35,7 +35,7 @@ export class NavbarComponent implements OnInit {
       if (result.isConfirmed) {
         this.clientService.logout().subscribe( (resp:any) => {
           if (resp.status == 204) {
-            this.router.navigateByUrl('/news');
+            this.router.navigateByUrl('/home');
             const Toast = Swal.mixin({
               toast: true,
               position: 'top-end',

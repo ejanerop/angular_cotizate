@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Client } from 'src/app/models/client.model';
 import { Payment } from 'src/app/models/payment.model';
 import { ClientsService } from 'src/app/services/clients.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-users',
@@ -19,6 +20,52 @@ export class UsersComponent implements OnInit {
   constructor( private clientService : ClientsService, private router : Router ) { }
 
   ngOnInit(): void {
+    this.refreshUsers();
+  }
+
+  edit(id : number){
+    this.router.navigate(['users', id]);
+  }
+
+  new(){
+    this.router.navigate(['users', 'new']);
+  }
+
+  delete(id : number){
+    Swal.fire({
+      icon : 'question',
+      title : 'Está seguro que desea eliminar el usuario?',
+      text : 'Ten en cuenta que se eliminarán todos los registros de pago.',
+      allowOutsideClick : false,
+      showCancelButton : true,
+      confirmButtonColor : 'primary',
+      confirmButtonText : 'Sí',
+      cancelButtonText : 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.clientService.deleteClient(id).subscribe( (resp:any) => {
+          if (resp.status == 204) {
+            this.refreshUsers();
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 1500,
+              timerProgressBar: true
+            })
+            Toast.fire({
+              icon: 'success',
+              title: 'Usuario eliminado con éxito'
+            });
+          }
+        });
+      }
+    });
+  }
+
+  refreshUsers(){
+    this.allClients = [];
+    this.clients = [];
     this.clientService.getClients().subscribe((data:any)=>{
       for (const item of data) {
         let payments : Payment[] = [];
@@ -29,14 +76,6 @@ export class UsersComponent implements OnInit {
       this.clients.sort((a, b) => Number(a.ip_address.split(".")[3]) - Number(b.ip_address.split(".")[3]));
       this.allClients = this.clients;
     });
-  }
-
-  edit(id : number){
-    this.router.navigate(['users', id]);
-  }
-
-  new(){
-    this.router.navigate(['users', 'new']);
   }
 
   find(termino : string){

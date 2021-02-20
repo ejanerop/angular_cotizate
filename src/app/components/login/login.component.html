@@ -1,7 +1,6 @@
 <main class="form-signin text-center">
-  <form [formGroup]="form" (ngSubmit)="login()"
-  >
-    <img class="mb-4" src="../assets/cash.svg" alt="" width="72" height="57">
+  <form [formGroup]="form" (ngSubmit)="login()">
+    <img class="mb-4 mt-lg-5" src=".../../../assets/login.png" alt="" width="72" height="72">
     <h1 class="h3 mb-3 fw-normal">Cotización</h1>
     <label for="" class="visually-hidden">Usuario</label>
     <input type="text" name="username" formControlName = "username" [class.is-invalid]="invalidUsername" class="form-control" placeholder="Usuarios" required>

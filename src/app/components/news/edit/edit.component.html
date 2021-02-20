@@ -30,17 +30,23 @@
         <div class="mb-3">
           <label for="title" class="form-label"> <h5>Título</h5> </label>
           <input type="text" name="title" id="title" class="form-control form-control-lg" formControlName = "title" [class.is-invalid]="invalid('title')"  placeholder="Encabezado de la noticia">
+          <div class="invalid-feedback">
+            El título de la noticia no puede estar vacío.
+          </div>
         </div>
         <div class="mb-3">
           <label for="description" class="form-label"> <h5>Contenido</h5> </label>
           <textarea name="description" id="description" class="form-control form-control-lg" formControlName = "description" [class.is-invalid]="invalid('description')"  placeholder="Cuerpo de la noticia" cols="30" rows="10"></textarea>
+          <div class="invalid-feedback">
+            El cuerpo de la noticia no puede estar vacío.
+          </div>
         </div>
         <div class="mb-5">
           <label for="image" class="form-label"> <h5>Imagen</h5> </label>
           <input type="file" accept="image/*" id="image" class="form-control form-control-lg" formControlName = "image" [class.is-invalid]="invalid('image')" (change)="onSelectFile($event)">
-        </div>
-        <div class="mb-5">
-          <img [src]="url" height="200">
+          <div class="invalid-feedback">
+            Debes seleccionar una imagen.
+          </div>
         </div>
         <div class="mb-3">
           <button class="btn btn-outline-primary btn-lg w-100" type="submit">Guardar</button>
@@ -49,20 +55,13 @@
       </form>
     </div>
     <div class="col-md-6">
-      <pre>
-        {{this.form.value | json}}
-      </pre>
-      <br>
-      <pre>
-        {{this.new | json}}
-      </pre>
+      <div class="mb-5 text-center" *ngIf="new.id!= 0">
+        <label for="title" class="form-label w-100"> <h5>Imagen actual</h5> </label>
+        <img [src]="imagePath(this.new)" height="200">
+      </div>
+      <div class="mb-5 text-center">
+        <label for="title" class="form-label  w-100"> <h5>Nueva imagen</h5> </label>
+        <img [src]="url" height="200">
+      </div>
     </div>
   </div>
-  <div class="row mb-5">
-    <h2 class="text-center">Preview</h2>
-    <app-new [imageFirst] = "true"
-    [url]="url"
-    [title]="this.new.title"
-    [description]="this.new.description"></app-new>
-  </div>
-</div>

@@ -24,8 +24,6 @@ export class UserListComponent implements OnInit {
 
   ngOnInit(): void {
     this.clientService.getIp().subscribe((data:any)=>{
-      console.log(data);
-
       this.ip = data;
     });
 
@@ -46,7 +44,6 @@ export class UserListComponent implements OnInit {
       });
     } else {
       this.clientService.getClientByIp().subscribe((data:any)=>{
-        console.log(data);
         for (const item of data) {
           let payments : Payment[] = [];
           for (const paymentItem of item.payments) {

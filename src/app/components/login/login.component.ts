@@ -31,8 +31,8 @@ export class LoginComponent implements OnInit {
 
   createForm(){
     this.form = this.fb.group({
-      username : ['vengador', Validators.required],
-      password : ['sc3iFQxt', Validators.required],
+      username : ['', Validators.required],
+      password : ['', Validators.required],
     });
   }
 
@@ -54,12 +54,9 @@ export class LoginComponent implements OnInit {
     });
     Swal.showLoading();
 
-    console.log(this.form.value);
-
     this.service.login(this.form.value).subscribe(
       (data : any)=>{
-        console.log(data)
-        this.router.navigateByUrl('/news');
+        this.router.navigateByUrl('/home');
         const Toast = Swal.mixin({
           toast: true,
           position: 'top-end',

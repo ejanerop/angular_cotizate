@@ -84,8 +84,6 @@ export class EditComponent implements OnInit {
 
 
   save() {
-    console.log(this.form.value);
-    console.log(this.form.status);
 
     if (this.form.invalid) {
       this.form.get('nick')?.markAsTouched();
@@ -101,7 +99,6 @@ export class EditComponent implements OnInit {
     this.user.active_account = this.form.value.active_account;
 
     this.service.editUser(this.user).subscribe( (resp : any)=> {
-      console.log(resp)
       if (resp.status == 204) {
         this.router.navigateByUrl('/users');
         this.fireToast(true, 'Usuario modificado con éxito!');
@@ -112,7 +109,6 @@ export class EditComponent implements OnInit {
       }
 
     }, (error : any)=> {
-      console.log(error)
       if (error.status == 422) {
         Swal.fire({
           icon : 'error',

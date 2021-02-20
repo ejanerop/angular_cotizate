@@ -25,7 +25,7 @@ export class EditComponent implements OnInit {
       'id' : ['', Validators.required],
       'title' : ['', Validators.required],
       'description' : ['', Validators.required],
-      'image' : [null, [Validators.required]],
+      'image' : [null],
       'image2' : [null]
 
     });
@@ -43,9 +43,9 @@ export class EditComponent implements OnInit {
       this.new.id = 0;
       this.loading = false;
       this.reset();
+      this.form.get('image')?.setValidators(Validators.required);
     } else if(Number(this.id) != null && Number(this.id) > 0) {
       this.service.getNew(this.id).subscribe((resp : any) => {
-        console.log(resp);
         this.new.id = resp.id;
         this.new.title = resp.title;
         this.new.description = resp.description;
@@ -75,8 +75,6 @@ export class EditComponent implements OnInit {
   }
 
   save() {
-    console.log(this.form.value);
-    console.log(this.form.status);
 
     if (this.form.invalid) {
       this.form.get('title')?.markAsTouched();
@@ -103,6 +101,10 @@ export class EditComponent implements OnInit {
       }
     });
 
+  }
+
+  imagePath(portalNew : New){
+    return this.service.getImagePath(portalNew);
   }
 
 

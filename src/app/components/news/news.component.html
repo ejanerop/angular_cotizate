@@ -21,11 +21,11 @@
         <td>{{client.title}}</td>
         <td>{{client.description}}</td>
         <td>
-          <img src="{{client.src}}" alt="Image not found" width="100" height="100">
+          <img src="{{imagePath(client)}}" alt="Image not found" width="100" height="100">
         </td>
         <td>
           <button class="btn btn-outline-info me-2" type="button" (click)= "edit(client.id)"><i class="fa fa-pencil"></i></button>
-          <button class="btn btn-outline-danger" type="button"><i class="fa fa-trash"></i></button>
+          <button class="btn btn-outline-danger" type="button" (click)= "delete(client.id)"><i class="fa fa-trash"></i></button>
         </td>
       </tr>
     </tbody>
