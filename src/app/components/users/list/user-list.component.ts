@@ -16,6 +16,7 @@ export class UserListComponent implements OnInit {
   clientsFull : Client[] = [];
   termino : string = '';
   ip : string = '';
+  loading : boolean = true;
 
 
   constructor(public clientService : ClientsService) {
@@ -41,6 +42,7 @@ export class UserListComponent implements OnInit {
         }
         this.clients.sort((a, b) => Number(a.ip_address.split(".")[3]) - Number(b.ip_address.split(".")[3]));
         this.clientsFull = this.clients;
+        this.loading = false;
       });
     } else {
       this.clientService.getClientByIp().subscribe((data:any)=>{
@@ -56,6 +58,7 @@ export class UserListComponent implements OnInit {
         }
         this.clients.sort((a, b) => Number(a.ip_address.split(".")[3]) - Number(b.ip_address.split(".")[3]));
         this.clientsFull = this.clients;
+        this.loading = false;
       });
     }
   }

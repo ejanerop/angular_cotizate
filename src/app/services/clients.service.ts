@@ -9,7 +9,7 @@ import { New } from '../models/new.model';
 })
 export class ClientsService {
 
-  private _url : string = 'http://localhost:8001/api';
+  private _url : string = 'http://10.24.122.2:8000/api';
   api_token : string | null = '';
   username : string = '';
 
@@ -46,7 +46,7 @@ export class ClientsService {
 
   editNew(data : FormData){
 
-    const url = 'http://localhost:8001/api/new';
+    const url = `${this._url}/new`;
 
     if (this.api_token != null) {
       data.append('api_token', this.api_token);

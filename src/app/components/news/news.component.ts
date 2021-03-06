@@ -12,6 +12,7 @@ import Swal from "sweetalert2";
 export class NewsComponent implements OnInit {
 
   news : New[] = [];
+  loading : boolean = true;
 
   constructor( private clientService : ClientsService, private router : Router ) { }
 
@@ -38,6 +39,7 @@ export class NewsComponent implements OnInit {
         let portalNew = new New(item.id, item.title, item.description, item.src);
         this.news.push(portalNew);
       }
+      this.loading = false;
     });
   }
 

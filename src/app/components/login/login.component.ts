@@ -69,7 +69,6 @@ export class LoginComponent implements OnInit {
           title: 'Inicio de sesión exitoso!'
         });
       },error=>{
-        console.error(error);
         if (error.status == 422){
           Swal.fire({
             icon : 'error',

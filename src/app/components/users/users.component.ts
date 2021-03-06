@@ -78,7 +78,7 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  find(termino : string){
+  find(termino : string) {
     if (termino == '') {
       this.clients = this.allClients;
     } else {

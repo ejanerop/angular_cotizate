@@ -23,7 +23,7 @@
         <div class="carousel-caption">
           <h1>Mantente al día con los pagos de la red</h1>
           <p>. Revisa el estado de tu cuenta.</p>
-          <p><a class="btn btn-lg btn-primary" [routerLink]="['/home']" role="button">Ir a lista de usuarios</a></p>
+          <p><a class="btn btn-lg btn-primary" [routerLink]="['/user_list']" role="button">Ir a lista de usuarios</a></p>
         </div>
       </div>
     </div>
@@ -83,8 +83,6 @@
   </div>
 
 
-  <!-- START THE FEATURETTES -->
-
   <app-new *ngFor="let item of news; let i=index"
   [imageFirst]="even(i)"
   [url]="imagePath(item)"
@@ -93,12 +91,11 @@
 
   <hr class="featurette-divider">
 
-  <!-- /END THE FEATURETTES -->
+</div>
 
-</div><!-- /.container -->
-
-<footer class="footer mt-auto py-3 bg-light">
-  <div class="container">
-    <span class="text-muted">Place sticky footer content here.</span>
+<footer class="bg-light text-center text-lg-start">
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+    © 2021 Copyright:
+    <a class="text-dark" href="https://github.com/ejanerop" target="_blank">Eric Janero</a>
   </div>
 </footer>

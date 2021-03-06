@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.clientService.getNews().subscribe((data : any) =>{
+
       for (const item of data) {
         let portalNew = new New(item.id, item.title, item.description, item.src);
         this.news.push(portalNew);

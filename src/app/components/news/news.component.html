@@ -31,7 +31,13 @@
     </tbody>
   </table>
 
-  <div class="alert alert-info text-center" role="alert" *ngIf="news.length == 0">
+  <div class="alert alert-warning text-center" role="alert" *ngIf="news.length == 0 && !loading">
+    <p>
+      <i class="fa fa-exclamation-circle fa-4x"></i>
+    </p>
+    <h2 class="text-center"> Nada que mostrar </h2>
+  </div>
+  <div class="alert alert-info text-center" role="alert" *ngIf="loading">
     <p>
       <i class="fa fa-spinner fa-spin fa-4x"></i>
     </p>

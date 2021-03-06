@@ -91,6 +91,7 @@ export class EditComponent implements OnInit {
     formData.append('image', this.form.get('image2')?.value);
 
     this.service.editNew(formData).subscribe((resp : any) => {
+
       if (resp.status == 204) {
         this.router.navigateByUrl('/news');
         this.fireToast(true, 'Noticia modificada con éxito!');
