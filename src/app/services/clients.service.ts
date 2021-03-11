@@ -129,78 +129,77 @@ export class ClientsService {
   login(data : any){
 
     const url = `${this._url}/login`;
-    return this.http.post(url, data, {observe: 'response'}).pipe(
-      map( (resp : any) => {
-        this.saveToken(resp.body.data.api_token);
-        return resp;
-      })
-      );
+    return this.http.post(url, data, {observe: 'response'}).pipe( map( (resp : any) => {
+      this.saveToken(resp.body.data.api_token);
+      return resp;
+    })
+    );
 
+  }
+
+
+  logout() {
+
+    const url = `${this._url}/logout`;
+    const token = this.api_token;
+    return this.http.post(url, {api_token : token}, {observe: 'response'}).pipe( map( (resp : any) => {
+      this.removeToken();
+      return resp;
+    })
+    );;
+
+  }
+
+  removeToken() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('expira');
+  }
+
+  private saveToken( idToken: string ) {
+
+    this.api_token = idToken;
+    localStorage.setItem('token', idToken);
+
+    let hoy = new Date();
+    hoy.setSeconds( 3600 );
+
+    localStorage.setItem('expira', hoy.getTime().toString() );
+
+
+  }
+
+  loadToken() {
+
+    if ( localStorage.getItem('token') == null ) {
+      this.api_token = '';
+    } else {
+      this.api_token = localStorage.getItem('token');
+    }
+
+    return this.api_token;
+
+  }
+
+
+  isAuth() {
+    if ( this.api_token != null && this.api_token.length < 2  ) {
+      return false;
+    }
+
+    const expira = Number(localStorage.getItem('expira'));
+    const expiraDate = new Date();
+    expiraDate.setTime(expira);
+
+    if ( expiraDate > new Date() ) {
+      return true;
+    } else {
+      return false;
     }
 
 
-    logout(){
-
-      const url = `${this._url}/logout`;
-      const token = this.api_token;
-      return this.http.post(url, {api_token : token}, {observe: 'response'}).pipe(
-        map( (resp : any) => {
-          this.removeToken();
-          return resp;
-        })
-        );;
-
-      }
-      removeToken() {
-        localStorage.removeItem('token');
-        localStorage.removeItem('expira');
-      }
-
-      private saveToken( idToken: string ) {
-
-        this.api_token = idToken;
-        localStorage.setItem('token', idToken);
-
-        let hoy = new Date();
-        hoy.setSeconds( 3600 );
-
-        localStorage.setItem('expira', hoy.getTime().toString() );
-
-
-      }
-
-      loadToken() {
-
-        if ( localStorage.getItem('token') == null ) {
-          this.api_token = '';
-        } else {
-          this.api_token = localStorage.getItem('token');
-        }
-
-        return this.api_token;
-
-      }
-
-
-      isAuth() {
-        if ( this.api_token != null && this.api_token.length < 2  ) {
-          return false;
-        }
-
-        const expira = Number(localStorage.getItem('expira'));
-        const expiraDate = new Date();
-        expiraDate.setTime(expira);
-
-        if ( expiraDate > new Date() ) {
-          return true;
-        } else {
-          return false;
-        }
-
-
-      }
+  }
 
 
 
 
-    }
+}
